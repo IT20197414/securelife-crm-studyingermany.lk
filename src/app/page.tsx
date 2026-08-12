@@ -27,19 +27,19 @@ export default function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/quote"
-                className="rounded-full bg-slate-950 px-6 py-3 font-semibold text-white"
+                className="rounded-full bg-cyan-400 px-6 py-3 font-semibold text-slate-950 shadow-sm"
               >
                 Get a Free Quote
               </Link>
               <Link
                 href="/plans"
-                className="rounded-full border border-slate-200 px-6 py-3 font-semibold text-slate-700"
+                className="rounded-full border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-950 shadow-sm"
               >
                 Compare Plans
               </Link>
               <Link
                 href="/admin"
-                className="rounded-full border border-cyan-200 bg-cyan-50 px-6 py-3 font-semibold text-cyan-900"
+                className="rounded-full border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-950 shadow-sm"
               >
                 Open CRM
               </Link>

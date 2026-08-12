@@ -58,10 +58,10 @@ export default function PlansPage() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/quote" className="rounded-full bg-slate-950 px-6 py-3 font-semibold text-white">
+          <Link href="/quote" className="rounded-full bg-cyan-400 px-6 py-3 font-semibold text-slate-950 shadow-sm">
             Get a Free Quote
           </Link>
-          <Link href="/admin" className="rounded-full border border-slate-200 px-6 py-3 font-semibold text-slate-700">
+          <Link href="/admin" className="rounded-full border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-950 shadow-sm">
             Open CRM
           </Link>
         </div>

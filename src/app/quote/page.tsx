@@ -61,8 +61,8 @@ export default function QuotePage() {
                 onClick={() => setSource(item)}
                 className={`rounded-full px-4 py-2 text-sm font-medium ${
                   source === item
-                    ? "bg-cyan-400 text-slate-950"
-                    : "border border-slate-200 text-slate-700"
+                    ? "border border-cyan-300 bg-cyan-400 text-slate-950"
+                    : "border border-slate-300 bg-white text-slate-950"
                 }`}
               >
                 {item}
@@ -132,7 +132,7 @@ export default function QuotePage() {
             </p>
           </div>
 
-          <button className="mt-6 rounded-full bg-slate-950 px-6 py-3 font-semibold text-white">
+          <button className="mt-6 rounded-full bg-cyan-400 px-6 py-3 font-semibold text-slate-950 shadow-sm">
             Submit and save as lead
           </button>
 
@@ -163,10 +163,10 @@ export default function QuotePage() {
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/admin" className="rounded-full bg-cyan-400 px-5 py-3 font-semibold text-slate-950">
+            <Link href="/admin" className="rounded-full bg-cyan-400 px-5 py-3 font-semibold text-slate-950 shadow-sm">
               Open CRM
             </Link>
-            <Link href="/plans" className="rounded-full border border-slate-200 px-5 py-3 font-semibold text-slate-700">
+            <Link href="/plans" className="rounded-full border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-950 shadow-sm">
               View plans
             </Link>
           </div>

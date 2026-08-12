@@ -39,10 +39,10 @@ export function SiteShell({
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`rounded-full px-4 py-2 transition ${
+                  className={`rounded-full border px-4 py-2 font-semibold whitespace-nowrap transition ${
                     active
-                      ? "bg-cyan-400 text-slate-950"
-                      : "border border-white/10 text-slate-100 hover:bg-white/10"
+                      ? "border-cyan-300 bg-cyan-400 text-slate-950"
+                      : "border-slate-300 bg-white text-slate-950 hover:bg-slate-100"
                   }`}
                 >
                   {item.label}
