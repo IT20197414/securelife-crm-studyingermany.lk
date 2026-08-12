@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SecureLife CRM
 
-## Getting Started
+SecureLife CRM is a small insurance lead generation website and CRM built for the Studyingermany.lk internship assignment.
 
-First, run the development server:
+## What it does
+
+- Public website with plan pages and a quote form
+- Lead capture that stores submissions in the CRM
+- Lead assignment to advisors
+- Plan management for Basic, Gold, and Premium
+- User login for admin and advisor roles
+- Simple pipeline tracking for management visibility
+
+## Tech stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- Browser local storage for demo persistence
+
+## Demo accounts
+
+- Admin: `admin@securelife.lk` / `admin123`
+- Advisor: `advisor1@securelife.lk` / `advisor123`
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Public site: `http://127.0.0.1:3000`
+- CRM dashboard: `http://127.0.0.1:3000/admin`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features in this build
 
-## Learn More
+### Public website
 
-To learn more about Next.js, take a look at the following resources:
+- Hero section and plan overview
+- Insurance plan comparison
+- Free quote form and advisor request flow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### CRM
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Lead list
+- Lead status updates
+- Advisor assignment
+- Lead notes
+- Plan creation and editing
+- User management
 
-## Deploy on Vercel
+## Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- This version stores demo data in the browser so it works without extra backend setup.
+- It is easy to connect to a real database later if you want to upgrade it for production.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Assignment deliverables
+
+- Live URL
+- GitHub repository link
+- Prompt documentation
+- README
+
