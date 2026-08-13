@@ -21,32 +21,54 @@ export default function QuotePage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submittedName, setSubmittedName] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState("");
 
   const planMatch = useMemo(() => {
     const age = Number(form.age || 0);
     return age > 0 ? recommendPlan(age, crm.state.plans) : crm.state.plans[0];
   }, [crm.state.plans, form.age]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    crm.addLead({
-      fullName: form.fullName,
-      phone: form.phone,
-      email: form.email,
-      age: Number(form.age),
-      interestedPlan: form.interestedPlan,
-      source,
-    });
-    setSubmitted(true);
-    setSubmittedName(form.fullName);
-    setForm({
-      fullName: "",
-      phone: "",
-      email: "",
-      age: "",
-      interestedPlan: "Basic",
-    });
-    setSource("Website Quote");
+    setError("");
+    setIsSaving(true);
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: form.fullName,
+          phone: form.phone,
+          email: form.email,
+          age: Number(form.age),
+          interestedPlan: form.interestedPlan,
+          source,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Lead could not be saved.");
+      }
+
+      setSubmitted(true);
+      setSubmittedName(form.fullName);
+      setForm({
+        fullName: "",
+        phone: "",
+        email: "",
+        age: "",
+        interestedPlan: "Basic",
+      });
+      setSource("Website Quote");
+    } catch {
+      setError("Sorry, the lead could not be saved. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -58,7 +80,15 @@ export default function QuotePage() {
               <button
                 key={item}
                 type="button"
-                onClick={() => setSource(item)}
+                onClick={() => {
+                  setSource(item);
+                  if (item === "Talk to Advisor") {
+                    document.getElementById("advisor-help")?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
                 className={`rounded-full px-4 py-2 text-sm font-medium ${
                   source === item
                     ? "border border-cyan-300 bg-cyan-400 text-slate-950"
@@ -69,6 +99,17 @@ export default function QuotePage() {
               </button>
             ))}
           </div>
+
+          {source === "Talk to Advisor" && (
+            <div className="mt-4 rounded-2xl border border-cyan-200 bg-cyan-50 p-4">
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-700">
+                Advisor request selected
+              </p>
+              <p className="mt-2 text-sm text-slate-700">
+                This will be treated as a direct advisor callback request and highlighted in the CRM.
+              </p>
+            </div>
+          )}
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <Field label="Full name">
@@ -132,8 +173,15 @@ export default function QuotePage() {
             </p>
           </div>
 
-          <button className="mt-6 rounded-full bg-cyan-400 px-6 py-3 font-semibold text-slate-950 shadow-sm">
-            Submit and save as lead
+          <button
+            disabled={isSaving}
+            className="mt-6 rounded-full bg-cyan-400 px-6 py-3 font-semibold text-slate-950 shadow-sm disabled:cursor-wait disabled:opacity-70"
+          >
+            {isSaving
+              ? "Saving lead..."
+              : source === "Talk to Advisor"
+                ? "Request advisor follow-up"
+                : "Submit and save as lead"}
           </button>
 
           {submitted && (
@@ -141,35 +189,73 @@ export default function QuotePage() {
               Thanks, {submittedName}. Your request is now stored in the CRM as a new lead.
             </div>
           )}
+
+          {error && (
+            <div className="mt-4 rounded-2xl border border-rose-200 bg-rose-50 p-4 text-rose-900">
+              {error}
+            </div>
+          )}
         </form>
 
-        <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
-          <h3 className="text-2xl font-semibold text-slate-950">What happens next?</h3>
-          <ol className="mt-5 space-y-4 text-sm leading-7 text-slate-600">
-            <li>1. The form submission becomes a lead.</li>
-            <li>2. An advisor is assigned automatically.</li>
-            <li>3. The lead appears inside the CRM dashboard.</li>
-            <li>4. The advisor can call, follow up, and update the status.</li>
-            <li>5. Management can track the full sales pipeline.</li>
-          </ol>
+        <div
+          id="advisor-help"
+          className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm scroll-mt-24"
+        >
+          <h3 className="text-2xl font-semibold text-slate-950">
+            {source === "Talk to Advisor" ? "Talk to an Advisor" : "What happens next?"}
+          </h3>
+          {source === "Talk to Advisor" ? (
+            <div className="mt-5 space-y-4">
+              <p className="text-sm leading-7 text-slate-600">
+                This option means the lead should be treated as a direct advisor request.
+                The CRM will capture it the same way, but the advisor follows up first.
+              </p>
 
-          <div className="mt-8 rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-              Demo note
-            </p>
-            <p className="mt-2 text-sm text-slate-600">
-              This assignment version uses browser storage so the workflow works without a backend setup.
-            </p>
-          </div>
+              <div className="rounded-2xl bg-slate-50 p-4">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
+                  Advisor follow-up
+                </p>
+                <p className="mt-2 text-sm text-slate-700">The assigned advisor will call or message the lead.</p>
+                <p className="mt-1 text-sm text-slate-700">Best for people who want help choosing a plan.</p>
+              </div>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/admin" className="rounded-full bg-cyan-400 px-5 py-3 font-semibold text-slate-950 shadow-sm">
-              Open CRM
-            </Link>
-            <Link href="/plans" className="rounded-full border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-950 shadow-sm">
-              View plans
-            </Link>
-          </div>
+              <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-4">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-700">
+                  Example contact
+                </p>
+                <p className="mt-2 text-sm text-slate-700">Advisor desk: +94 11 234 5678</p>
+                <p className="text-sm text-slate-700">Email: advisor@securelife.lk</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              <ol className="mt-5 space-y-4 text-sm leading-7 text-slate-600">
+                <li>1. The form submission becomes a lead.</li>
+                <li>2. An advisor is assigned automatically.</li>
+                <li>3. The lead appears inside the CRM dashboard.</li>
+                <li>4. The advisor can call, follow up, and update the status.</li>
+                <li>5. Management can track the full sales pipeline.</li>
+              </ol>
+
+              <div className="mt-8 rounded-2xl bg-slate-50 p-4">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
+                  Demo note
+                </p>
+                <p className="mt-2 text-sm text-slate-600">
+                  This assignment version stores leads in the local SQLite-backed CRM database.
+                </p>
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/admin" className="rounded-full bg-cyan-400 px-5 py-3 font-semibold text-slate-950 shadow-sm">
+                  Open CRM
+                </Link>
+                <Link href="/plans" className="rounded-full border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-950 shadow-sm">
+                  View plans
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </SiteShell>

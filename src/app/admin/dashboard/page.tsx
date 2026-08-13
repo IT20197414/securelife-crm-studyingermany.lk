@@ -5,7 +5,7 @@ import { readDatabaseState } from "@/lib/server-db";
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-export default function AdminPage() {
+export default function AdminDashboardPage() {
   const state = readDatabaseState();
 
   return (

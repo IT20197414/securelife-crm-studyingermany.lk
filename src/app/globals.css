@@ -40,3 +40,9 @@ select,
 textarea {
   font: inherit;
 }
+
+button,
+[role="button"],
+a {
+  cursor: pointer;
+}
