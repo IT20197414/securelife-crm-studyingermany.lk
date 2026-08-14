@@ -1,10 +1,13 @@
 import Database from "better-sqlite3";
 import { mkdirSync } from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { buildDefaultState } from "./crm-data";
 import { CRMState, CRMUser, Lead, Plan, Session } from "./types";
 
-const dataDir = path.join(process.cwd(), ".data");
+const dataDir = process.env.VERCEL
+  ? path.join(os.tmpdir(), "securelife-crm")
+  : path.join(process.cwd(), ".data");
 const dbFile = path.join(dataDir, "securelife-crm.sqlite");
 
 type PlanRow = Omit<Plan, "coverageAmount" | "minAge" | "maxAge" | "benefits"> & {
