@@ -50,8 +50,8 @@ export function AdminConsole({
   const session = state.session;
 
   const tab = initialTab;
-  const [loginEmail, setLoginEmail] = useState("admin@securelife.lk");
-  const [loginPassword, setLoginPassword] = useState("admin123");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const [selectedLeadId, setSelectedLeadId] = useState<string>("");
   const [leadNote, setLeadNote] = useState("");
   const [planDraft, setPlanDraft] = useState<Plan>({
@@ -178,6 +178,7 @@ export function AdminConsole({
                 <span className="mb-1 block text-sm font-medium text-slate-700">Email</span>
                 <input
                   name="email"
+                  placeholder="admin@securelife.lk"
                   value={loginEmail}
                   onChange={(event) => setLoginEmail(event.target.value)}
                   className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-cyan-400 focus:ring-2"
@@ -188,6 +189,7 @@ export function AdminConsole({
                 <input
                   name="password"
                   type="password"
+                  placeholder="admin123"
                   value={loginPassword}
                   onChange={(event) => setLoginPassword(event.target.value)}
                   className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-cyan-400 focus:ring-2"
