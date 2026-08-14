@@ -233,8 +233,8 @@ export default function QuotePage() {
                 <li>1. The form submission becomes a lead.</li>
                 <li>2. An advisor is assigned automatically.</li>
                 <li>3. The lead appears inside the CRM dashboard.</li>
-                <li>4. The advisor can call, follow up, and update the status.</li>
-                <li>5. Management can track the full sales pipeline.</li>
+                <li>4. The advisor will call you, follow up, and help with the next step.</li>
+                <li>5. You can discuss the best plan before moving forward.</li>
               </ol>
 
               <div className="mt-8 rounded-2xl bg-slate-50 p-4">
