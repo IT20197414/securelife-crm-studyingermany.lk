@@ -19,6 +19,7 @@ export async function POST(request: Request) {
   );
 
   if (!user) {
+    writeDatabaseState({ ...state, session: null });
     return NextResponse.redirect(new URL("/admin?login=failed", request.url), 303);
   }
 

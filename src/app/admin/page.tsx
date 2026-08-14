@@ -5,14 +5,15 @@ import { readDatabaseState } from "@/lib/server-db";
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-export default function AdminPage({
+export default async function AdminPage({
   searchParams,
 }: {
-  searchParams?: { login?: string };
+  searchParams?: Promise<{ login?: string }>;
 }) {
   const state = readDatabaseState();
+  const params = await searchParams;
   const loginError =
-    searchParams?.login === "failed" ? "Invalid email or password. Please try again." : null;
+    params?.login === "failed" ? "Invalid email or password. Please try again." : null;
 
   return (
     <SiteShell title="CRM Dashboard" subtitle="Admin and advisor workspace">

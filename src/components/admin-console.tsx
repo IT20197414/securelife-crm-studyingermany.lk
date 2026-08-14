@@ -163,7 +163,7 @@ export function AdminConsole({
               ? `${session.name} - ${session.role}`
               : "Use the demo account if you want to switch users."}
           </p>
-          {!session && loginError ? (
+          {loginError ? (
             <div className="mt-4 rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">
               {loginError}
             </div>
