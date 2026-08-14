@@ -18,11 +18,11 @@ export default function HomePage() {
               Public site connected to CRM
             </p>
             <h2 className="mt-5 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-              Turn visitors into leads, and leads into enrolled policyholders.
+              Find a life insurance plan that fits your next step.
             </h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-              SecureLife helps advisors capture quote requests, compare insurance
-              plans, assign leads, and track the sales pipeline in one place.
+              Compare cover options, request a free quote, or ask an advisor to
+              help you choose the right SecureLife plan.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -37,19 +37,13 @@ export default function HomePage() {
               >
                 Compare Plans
               </Link>
-              <Link
-                href="/admin"
-                className="rounded-full border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-950 shadow-sm"
-              >
-                Open CRM
-              </Link>
             </div>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
               {[
-                ["Leads", state.leads.length.toString()],
-                ["Plans", plans.length.toString()],
-                ["Advisors", state.users.filter((u) => u.role === "Advisor").length.toString()],
+                ["Free quote", "Fast request"],
+                ["Plan options", plans.length.toString()],
+                ["Advisor help", "Available"],
               ].map(([label, value]) => (
                 <div key={label} className="rounded-2xl bg-slate-50 p-4">
                   <p className="text-sm text-slate-500">{label}</p>
@@ -62,31 +56,34 @@ export default function HomePage() {
           <div className="grid gap-4">
             <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-lg">
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-700">
-                Sales pipeline
+                Start here
               </p>
-              <div className="mt-5 space-y-3">
-                {["New", "Contacted", "Follow-up", "Interested", "Enrolled"].map((stage) => (
-                  <div key={stage} className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
-                    <span className="font-medium text-slate-700">{stage}</span>
-                    <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-slate-900">
-                      {state.leads.filter((lead) => lead.status === stage).length}
-                    </span>
-                  </div>
-                ))}
+              <div className="mt-5 space-y-3 text-sm text-slate-700">
+                <div className="rounded-2xl bg-slate-50 p-4">
+                  <p className="font-semibold text-slate-950">Compare plans</p>
+                  <p className="mt-1">Review Basic, Gold, and Premium cover options.</p>
+                </div>
+                <div className="rounded-2xl bg-slate-50 p-4">
+                  <p className="font-semibold text-slate-950">Get a free quote</p>
+                  <p className="mt-1">Submit your details and preferred plan in a simple form.</p>
+                </div>
+                <div className="rounded-2xl bg-slate-50 p-4">
+                  <p className="font-semibold text-slate-950">Talk to an advisor</p>
+                  <p className="mt-1">Request a callback if you want help choosing a plan.</p>
+                </div>
               </div>
             </div>
 
             <div className="rounded-[2rem] bg-slate-950 p-6 text-white shadow-lg">
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
-                Demo accounts
+                Need support?
               </p>
               <div className="mt-4 space-y-3 text-sm text-slate-300">
-                <p>Admin: admin@securelife.lk / admin123</p>
-                <p>Advisor: advisor1@securelife.lk / advisor123</p>
+                <p>Use the quote form to request a plan estimate.</p>
+                <p>Select Talk to Advisor if you prefer a guided callback.</p>
               </div>
               <p className="mt-5 text-sm text-slate-400">
-                This local demo stores data in your browser so you can show the workflow
-                without extra setup.
+                CRM access is reserved for authorized SecureLife staff.
               </p>
             </div>
           </div>
