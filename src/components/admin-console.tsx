@@ -230,8 +230,8 @@ export function AdminConsole({
             CRM access
           </p>
           <p className="mt-2 text-sm leading-7 text-slate-700">
-            The dashboard is always visible now, so you can work with the CRM even if the
-            login state is not loaded yet.
+            CRM pages are protected. Public visitors can use the website and quote form, but
+            lead, plan, and user management are available only after login.
           </p>
           <div className="mt-4 rounded-2xl bg-white/80 p-4 text-sm text-slate-700">
             <p className="font-semibold">Demo credentials</p>
@@ -241,6 +241,15 @@ export function AdminConsole({
         </div>
       </div>
 
+      {!session && (
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 text-sm leading-7 text-slate-600 shadow-sm">
+          Please log in as an admin or advisor to access CRM workspace sections, lead records,
+          sales pipeline data, plans, and user management.
+        </div>
+      )}
+
+      {session && (
+        <>
       <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
         <div className="flex flex-wrap items-center gap-2">
           <span className="mr-2 text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
@@ -672,6 +681,8 @@ export function AdminConsole({
             </Panel>
           </div>
         )
+      )}
+        </>
       )}
     </div>
   );
