@@ -24,7 +24,9 @@ The assignment was interpreted as a life insurance CRM workflow:
 
 This helped define the main system flow before implementation.
 
-## 2. Initial Build Prompt
+## 2. Master Prompt / Initial Build Prompt
+
+The master prompt is the main project brief used to start the build. It describes the overall system goals before the smaller follow-up prompts.
 
 ### Prompt
 
