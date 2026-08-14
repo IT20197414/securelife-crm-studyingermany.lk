@@ -177,3 +177,23 @@ npm run build
 - Live deployment URL
 - Prompt documentation
 - README documentation
+
+## Deployment Notes
+
+This project is set up as a quick demo deployment:
+
+- The app is a single Next.js project, so the public site and CRM run together.
+- The backend uses Next.js API routes.
+- The demo database uses local SQLite-backed storage.
+- This is fine for showing the assignment flow, but it should still be treated as demo storage rather than production-grade persistence.
+
+Recommended quick deployment flow:
+
+1. Push the latest code to GitHub.
+2. Connect the repository to a host such as Vercel.
+3. Let the host build the app from the `master` branch.
+4. Open the live URL and verify:
+   - Public pages load
+   - Quote submission creates a lead
+   - CRM login works
+   - Leads appear in the CRM sheet
